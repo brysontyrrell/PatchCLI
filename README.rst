@@ -98,6 +98,9 @@ Import and use the API clients for Patch Server and CommunityPatch.
 History
 =======
 
+Versions
+--------
+
 0.2.0 (2018-10-27)
 ^^^^^^^^^^^^^^^^^^
 
