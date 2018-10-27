@@ -6,16 +6,24 @@ import toml
 
 regex = re.compile(r'^__\w+__\s*=.*$')
 
-about = dict()
-with open('patchlib/__init__.py', 'r') as f:
-    dunders = list()
-    for l in f.readlines():
-        if regex.match(l):
-            dunders.append(l)
-    exec('\n'.join(dunders), about)
 
-with open('README.rst', 'r') as f:
-    readme = f.read()
+def get_dunders():
+    values = dict()
+    with open('patchlib/__init__.py', 'r') as f:
+        dunders = list()
+        for l in f.readlines():
+            if regex.match(l):
+                dunders.append(l)
+        exec('\n'.join(dunders), values)
+
+    return values
+
+
+def get_readme():
+    with open('README.rst', 'r') as f:
+        readme = f.read()
+
+    return readme
 
 
 def get_requirements():
@@ -32,11 +40,13 @@ def get_requirements():
     return requirements
 
 
+about = get_dunders()
+
 setup(
     name=about['__title__'],
     version=about['__version__'],
     description='A command line tool for Jamf Pro patch definition management.',
-    long_description=readme,
+    long_description=get_readme(),
     author=about['__author__'],
     author_email=about['__author_email__'],
     url='https://github.com/brysontyrrell/PatchCLI',
@@ -46,6 +56,7 @@ setup(
     ],
     packages=find_packages(),
     python_requires='>=2.7',
+    include_package_data=True,
     install_requires=get_requirements(),
     extras_require={},
     classifiers=[
