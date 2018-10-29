@@ -1,8 +1,5 @@
-import json
 import re
 from setuptools import find_packages, setup
-
-import toml
 
 regex = re.compile(r'^__\w+__\s*=.*$')
 
@@ -26,21 +23,12 @@ def get_readme():
     return readme
 
 
-def get_requirements():
-    pipfile = toml.load('Pipfile')
-    with open('Pipfile.lock', 'r') as f:
-        pipfile_lock = json.load(f)
-
-    requirements = list()
-    for r in pipfile_lock['default'].keys():
-        if r in pipfile['packages'].keys():
-            requirements.append('{}{}'.format(
-                r, pipfile_lock['default'][r]['version'].replace('==', '>=')))
-
-    return requirements
-
-
 about = get_dunders()
+
+requirements = [
+    "jsonschema>=2.6.0",
+    "requests>=2.20.0"
+]
 
 setup(
     name=about['__title__'],
@@ -57,7 +45,7 @@ setup(
     packages=find_packages(),
     python_requires='>=2.7',
     include_package_data=True,
-    install_requires=get_requirements(),
+    install_requires=requirements,
     extras_require={},
     classifiers=[
         'Development Status :: 3 - Alpha',
