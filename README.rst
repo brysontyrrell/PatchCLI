@@ -103,6 +103,11 @@ History
 Versions
 --------
 
+0.2.2 (2018-10-29)
+^^^^^^^^^^^^^^^^^^
+
+Fix ``setup.py`` issues preventing installation via ``pip``.
+
 0.2.1 (2018-10-29)
 ^^^^^^^^^^^^^^^^^^
 
