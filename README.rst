@@ -14,7 +14,9 @@ PatchCLI can be installed from the Python Package Index:
 
 ::
 
-    $ pip install patchcli
+    $ pip install patchlib
+
+The ``patchlib`` module contains the ``patchcli`` command.
 
 About
 -----
@@ -100,6 +102,11 @@ History
 
 Versions
 --------
+
+0.2.1 (2018-10-29)
+^^^^^^^^^^^^^^^^^^
+
+Readme typos.
 
 0.2.0 (2018-10-27)
 ^^^^^^^^^^^^^^^^^^
