@@ -27,7 +27,8 @@ about = get_dunders()
 
 requirements = [
     "jsonschema>=2.6.0",
-    "requests>=2.20.0"
+    "requests>=2.20.0",
+    "pyjwt>=1.6.4"
 ]
 
 setup(

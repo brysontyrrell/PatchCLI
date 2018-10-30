@@ -27,17 +27,21 @@ Basic Usage
 ::
 
     $ patchcli -h
-    usage: patchcli [-h] [-v] {validate,patch} ...
+    usage: patchcli [-h] [-v] [-P PROFILE] {patch,validate,api,create_profile} ...
 
     PatchCLI is a command line tool for Jamf Pro patch definition management.
 
     Global Options:
-      -h, --help        show this help message and exit
-      -v, --version     Display version information.
+      -h, --help            show this help message and exit
+      -v, --version         Display version information.
+      -P PROFILE, --profile PROFILE
+                            The Patch API profile name to use.
 
     Commands:
-        validate        Validate an existing definition JSON file.
-        patch           Create a new definition JSON file
+        patch               Create a new definition JSON file
+        validate            Validate an existing definition JSON file.
+        api                 Perform quick interactions with the Patch APIs.
+        create_profile      Create a profile to use the Patch API integrations.
 
 Patch Command
 ^^^^^^^^^^^^^
@@ -88,8 +92,44 @@ Validate Command
       -h, --help   show this help message and exit
       -p, --patch  Validate a patch, not a full definition.
 
-Server Configs
---------------
+API Commands
+^^^^^^^^^^^^
+
+::
+
+    $ patchcli api -h
+    usage: patchcli api [-h] {list_titles,get_title} ...
+
+    optional arguments:
+      -h, --help            show this help message and exit
+
+    API Commands:
+        list_titles         List available software titles
+        get_title           Get a software title definition
+
+Patch API Profiles
+^^^^^^^^^^^^^^^^^^
+
+::
+
+    $ patchcli create_profile -h
+    usage: patchcli create_profile [-h] [-n <profile_name>] [-t <api_token>]
+                                   (--ps <patch_server_url> | --cp | --cpb)
+                                   [--overwrite]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -n <profile_name>, --name <profile_name>
+                            Profile name
+      -t <api_token>, --token <api_token>
+                            The API token
+      --ps <patch_server_url>, --patch-server <patch_server_url>
+                            The URL to a local Patch Server instance
+      --cp, --community-patch
+                            Use the Community Patch service
+      --cpb, --community-patch-beta
+                            Use the Beta Community Patch service
+      --overwrite           Overwrite an existing profile of the same name.
 
 PatchLib
 ========
@@ -102,6 +142,13 @@ History
 
 Versions
 --------
+
+0.3.0 (2018-10-31)
+^^^^^^^^^^^^^^^^^^
+
+Added ``api`` and ``create_profile`` commands. New options allow basic API access
+with the command line interface and will be expanded to include more features and
+integrate directly into the ``patch`` command.
 
 0.2.2 (2018-10-29)
 ^^^^^^^^^^^^^^^^^^
